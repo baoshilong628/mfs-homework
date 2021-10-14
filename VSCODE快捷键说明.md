@@ -33,3 +33,4 @@
 <kbd>Ctrl</kbd> + <kbd>~</kbd> 可以打开终端，在终端中输入git指令使用git
 
 在插件市场安装git插件，利用交互页面使用git
+
