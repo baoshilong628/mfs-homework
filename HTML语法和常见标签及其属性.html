@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML常用标签联练习</title>
+    <style>
+        .title {
+            text-align: center;
+            animation-name: in;
+            animation-duration: calc(0.2s * var(--time));
+        }
+
+        @keyframes in {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 100%;overflow: hidden;">
+
+        <!-- 标题 -->
+        <h1 class="title" style="--time:1">这是一个用来练习HTML元素的页面</h1>
+        <h2 class="title" style="--time:2">二级标题</h2>
+        <h3 class="title" style="--time:3">三级标题</h3>
+        <h4 class="title" style="--time:4">四级标题</h4>
+        <h5 class="title" style="--time:5">五级标题</h5>
+        <h6 class="title" style="--time:6">六级标题</h6>
+
+        <!-- 段落和块 -->
+
+        <div style="background-color: blanchedalmond;overflow: hidden; zoom: 1;">
+            <p style="background-color: rgb(158, 158, 255);">我是段落P &nbsp;&nbsp;&nbsp;&nbsp;淡黄色区域是我的外边距，淡蓝色区域是我的真实宽高</p>
+        </div>
+        <div style="background-color: aqua;">我是块div 我没有外边距，我们都是块级元素,默认换行+占满宽</div>
+
+
+        <!-- 行内书写 -->
+        <span style="background-color: blue;color: aliceblue;">我是行内文字span</span>
+        <span style="background-color: blueviolet; color: aliceblue;">我是另一个spna，左边的空格来自换行符</span><span
+            style="background-color: rgb(226, 43, 113); color: aliceblue;">我们是行内元素，不会自动换行，默认以内容为宽度</span>
+
+
+        <br />
+
+        <!-- 超链接 -->
+        <a href="http://www.baidu.com" target="_blank">我是超链接，前往百度(新窗口)</a>
+        <br />
+        <a href="http://www.baidu.com" target="_self">我是超链接，前往百度（自身）</a>
+        <br />
+        <a href="404.html" target="_parent">我是超链接，前往404</a>
+
+        <br />
+
+        <!-- 图片 -->
+        <img width="200" src="https://img0.baidu.com/it/u=2953039099,769603661&fm=26&fmt=auto" alt="盗取百度图片失败">
+
+        <!-- 列表 -->
+
+        <ol>
+            <li>a</li>
+            <li>b</li>
+            <li>c</li>
+        </ol>
+
+        <ul>
+            <li>Coffee</li>
+            <li>Tea</li>
+            <li>Milk</li>
+        </ul>
+
+        <!-- 分割线 -->
+        <hr />
+
+        <!-- 按钮 -->
+        <button>按钮</button>
+        <input type="button" value="另一种按钮"></input>
+
+        <!-- 表格 -->
+
+        <table>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Age</th>
+            </tr>
+            <tr>
+                <td>Jill</td>
+                <td>Smith</td>
+                <td>50</td>
+            </tr>
+            <tr>
+                <td>Eve</td>
+                <td>Jackson</td>
+                <td>94</td>
+            </tr>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Age</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jill</td>
+                    <td>Smith</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Eve</td>
+                    <td>Jackson</td>
+                    <td>94</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 文字特效 -->
+        <mark>Text</mark>
+        <strong>Text</strong>
+        <em>Text</em>
+        <del>Text</del>
+    </div>
+</body>
+
+</html>
