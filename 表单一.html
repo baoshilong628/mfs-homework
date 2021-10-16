@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单一</title>
+</head>
+<body>
+    <form action="/userInfo">
+        <div>
+            用户名：<input type="text" name="username" />
+        </div>
+        <div>
+            密码：<input type="password" name="password"/>
+        </div>
+        <div>
+            性别选择：<input type="radio" name="sex" value="1"/>男<input type="radio" name="sex" value="2"/>女
+        </div>
+        <div>
+            技能：<input type="checkbox" name="skill" value="HTML"/>HTML <input type="checkbox" name="skill" value="CSS"/>CSS <input type="checkbox" name="skill" value="JavaScript"/>JavaScript
+        </div>
+        <div>
+            所在城市：
+            <select name="city">
+                <option value="北京">北京</option>
+                <option value="上海">上海</option>
+                <option value="深圳">深圳</option>
+            </select>
+        </div>
+        <button type="submit">提交按钮</button>
+        <button type="reset">重置按钮</button>
+    </form>
+</body>
+</html>
