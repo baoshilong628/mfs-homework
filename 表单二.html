@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>表单二</title>
+</head>
+
+<body>
+    <form action="form" method="post">
+        <div>
+            文字输入框<input type="text" />
+        </div>
+        <div>
+            密码输入框<input type="password">
+        </div>
+
+        <div>
+            邮箱<input type="email">
+        </div>
+        <div>
+            数字输入框<input type="number">
+        </div>
+        <div>
+            url <input type="url">
+        </div>
+        <div>
+            范围选择器 <input type="range">
+        </div>
+        <div>
+            日期选择器 <input type="date">
+        </div>
+        <div>
+            时间选择器 <input type="time">
+        </div>
+        <div>
+            日期时间选择器 <input type="datetime">
+        </div>
+        <div>
+            月选择器 <input type="month">
+        </div>
+        <div>
+            周选择器 <input type="week">
+        </div>
+        <div>
+            搜索框 <input type="search">
+        </div>
+        <div>
+            颜色选择器 <input type="color">
+        </div>
+        <button type="submit">提交</button>
+    </form>
+    <form action="f2">
+        <div>
+            请输入邮箱 <input type="email"  >
+        </div>
+        <div>
+            请输入数字 <input type="text" pattern="^\d?[02468]$|100" title="请输入0到100之间的偶数">
+        </div>
+        <div>
+            <input list="city">
+            <datalist id="city">
+                <option value="北京">
+                <option value="上海">
+                <option value="广州">
+                <option value="深圳">
+            </datalist>
+        </div>
+        <button type="submit">提交</button>
+    </form>
+</body>
+
+</html>
