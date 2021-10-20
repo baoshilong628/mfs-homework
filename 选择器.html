@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            color:rgb(14, 0, 0);
+        }
+
+
+        p{
+            color:rgb(233, 187, 128)
+        }
+
+        
+        [hello]{
+            color:aqua
+        }
+
+        .world{
+            color:blue;
+        }
+
+        .world:nth-child(5){
+            color:rgb(137, 137, 238);
+        }
+
+        #world{
+            color: blueviolet;
+        }
+        
+        .imp{
+            color:rgb(255, 0, 0) !important;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+        <p style="color:brown;" id="world" class="world imp" hello>1.！important</p>
+        <p style="color:brown;" id="world" class="world" hello>2. 内联style</p>
+        <p  id="world" class="world" hello>3. id 选择器</p>
+        <p  class="world" hello>4. 类选择器</p>
+        <p  class="world" hello>5.伪类选择器</p>
+        <p  hello>6.属性选择器</p>
+        <p >7.标签选择器</p>
+        <div>8.通配符</div>
+    </div>
+</body>
+
+</html>

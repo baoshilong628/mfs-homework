@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        nav{
+            display: inline-block;
+        }
+        nav:hover{
+            color: red;
+        }
+        nav:hover .sub{
+            visibility:visible;
+        }
+        .sub{
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>导航1</h1>
+        <div class="sub">
+            <p>1</p>
+            <p>2</p>
+            <p>3</p>
+        </div>
+    </nav>
+    <nav>
+        <h1>导航2</h1>
+        <div class="sub">
+            <p>21</p>
+            <p>22</p>
+            <p>23</p>
+        </div>
+    </nav>
+</body>
+</html>
