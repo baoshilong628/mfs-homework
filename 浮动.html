@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .link {
+            margin: 5px 10px;
+            position: relative;
+        }
+
+        .cont {
+            max-width: 1040px;
+            margin: 0 auto;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        .cl::after {
+            content: "";
+            display: block;
+            width: 0;
+            visibility: hidden;
+            clear: both;
+        }
+
+        .nav {
+            background-color: #ffe502;
+        }
+        .sub{
+            background-color: #ffe502;
+            line-height: normal;
+            list-style: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            overflow: hidden;
+            height: 0;
+            min-width: 100%;
+        }
+        .link:hover .sub{
+            height: auto;
+        }
+        .sub li{
+            text-align: center;
+            margin-top: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="cont">
+            <a class="link fl">码蜂社
+                <ul class="sub">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </a>
+            <a class="link fl">首页
+                <ul class="sub">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </a>
+            <a class="link fl">前端
+                <ul class="sub">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </a>
+            <a class="link fl">社区
+                <ul class="sub">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </a>
+            <a class="link fr">登录</a>
+            <a class="link fr cl">注册</a>
+        </div>
+    </nav>
+</body>
+
+</html>
