@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cont{
+            display: flex;
+            flex-direction: column;
+            width: 600px;
+            height: 600px;
+        }
+        .header,.footer{
+            background-color: aqua;
+            height: 60px;
+        }
+        .center{
+            display: flex;
+            flex: 1;
+        }
+        .l,.r{
+            width: 60px;
+            background-color: bisque;
+        }
+        .l{
+            order: -1;
+        }
+        .c{
+            flex: 1;
+            background-color: aquamarine;
+        }
+        .to{
+            display: flex;
+            flex-wrap: wrap;
+            width: 600px;
+            height: 600px;
+            border: 1px black solid;
+        }
+        .container{
+            display: flex;
+        }
+        .toll{
+            background-color: black;
+            margin: 20px;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items:center;
+            justify-content: space-around;
+        }
+        .ce{
+            background-color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+       
+        }
+        .c4 .ce{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cont">
+            <div class="header"></div>
+            <div class="center">
+                <div class="c"></div>
+                <div class="l"></div>
+                <div class="r"></div>
+            </div>
+            <div class="footer"></div>
+        </div>
+        <div class="to">
+            <div class="toll">
+                <div class="ce"></div>
+            </div>
+            <div class="toll">
+                <div class="ce"></div>
+                <div class="ce"></div>
+            </div>
+            <div class="toll">
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+            </div>
+            <div class="toll c4">
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+            </div>
+            <div class="toll">
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce" style="margin-left: 50px;margin-right: 50px;"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+            </div>
+            <div class="toll" style="">
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+                <div class="ce"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
