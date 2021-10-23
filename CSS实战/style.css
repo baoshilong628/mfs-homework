@@ -1,0 +1,266 @@
+body{
+    margin: 0;
+}
+.header{
+   
+}
+.header-main{
+    padding: 40px 0 20px 0;
+    background-origin: padding-box;
+    background-position-x: 50%;
+    background-position-y: 20%;
+    background-image: url(https://www.golaravel.com/assets/images/header-bg.jpg)
+}
+.header-main h1{
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    font-size: 42px;
+    margin-bottom: 40px;
+}
+.docs{
+    display: flex;
+    justify-content: center;
+}
+.btn-doc{
+    text-decoration-line: none;
+    color: white;
+    border: 1px solid rgb(240,56,49);
+    padding: 7px 14px;
+    font-size: 14px;
+    margin: 2px;
+    border-radius:2px ;
+    transition: background-color 0.3s;
+}
+.btn-doc:hover{
+    background-color: black;
+    border-color: black;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+}
+.nav .link{
+    color: #505050;
+    text-decoration: none;
+    margin: 20px 30px;
+    font-size: 14px;
+}
+.nav{
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #e1e1e1;
+}
+.main{
+   background-color: #ebebeb;
+}
+.aside{
+    height: 500px;
+    float: left;
+    width: 30%;
+}
+.content{
+    float: left;
+    width: 67%;
+}
+.container{
+    padding: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+.footer{
+
+}
+.aside .item{
+    background-color: white;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+.aside .item .title{
+    padding-bottom: 7px;
+    margin: 0;
+    font-weight: 400;
+    font-size: 20px;
+    border-bottom: 2px solid #ebebeb;
+    position: relative;
+}
+
+.aside .item .title::after{
+    content: "";
+    display: block;
+    width: 80px;
+    position: absolute;
+    bottom: -1px;
+    border-bottom: 1px solid #f4645f;
+}
+.item a{
+    text-decoration: none;
+    color: #f4645f; 
+}
+
+.bloc{
+    border: 1px solid #f4645f;
+    background: #f4645f;
+    color: #fff;
+    transition: all .2s ease-in-out;
+
+    padding: 7px 14px;
+    border-radius: 2px;
+    font-size: 14px;
+
+    font-weight: 400;
+    text-align: center;
+    line-height: 1.42857143;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.bloc:hover{
+    background-color: black;
+    border-color: black;
+}
+
+.foot{
+    background: #111;
+    font-size: 13px;
+    text-align: center;
+    color: #555;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    border-top: 1px solid #303030;
+}
+
+.info{
+    background: #202020;
+    padding: 35px 0;
+    color: #959595;
+    display: flex;
+    justify-content: center;
+
+}
+
+.cell{
+    width: 300px;
+    margin:0 40px ;
+}
+.cell .title{
+    color: white;
+    padding-bottom: 7px;
+    margin: 0;
+    font-weight: 400;
+    font-size: 20px;
+    border-bottom: 2px solid #ebebeb17;
+    position: relative;
+}
+.cell .title::after{
+    content: "";
+    display: block;
+    width: 80px;
+    position: absolute;
+    bottom: -1px;
+    border-bottom: 1px solid #f4645f;
+}
+.more{
+    border: 2px solid #ebebeb17;
+    width: 20px;
+    text-align: center;
+    margin: 10px;
+}
+.ar .time {
+    color: #ebebeb3d;
+}
+
+.ar .msg:hover{
+    color: #f4645f;
+}
+.ar .msg{
+    color: #ebebeb81;
+}
+.ar{
+    border-bottom: 1px solid #ebebeb17;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.ac{
+    display: flex;
+    flex-wrap: wrap;
+}
+.ac a{
+    text-decoration: none;
+    color: #ebebeb81;
+    margin: 11px;
+    font-weight: 300;
+    font-size: 14px;
+}
+.ac{
+    border-bottom: 1px solid #ebebeb17;
+}
+.art{
+    background-color: white;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+.art h2{
+    text-align: center;
+    font-weight: 400;
+    font-size: 28px;
+}
+.zuozhe{
+    text-align: center;
+    color: #959595;
+}
+.zuozhe a{
+    text-decoration: none;
+    color: #f4645f;
+}
+.art img{
+    width: 100%;
+    margin: 20px 0;
+}
+.art a{
+    text-decoration: none;
+    color: #f4645f;
+}
+.art p{
+    font: 400 18px/1.62 Georgia,Xin Gothic,Hiragino Sans GB,Droid Sans Fallback,Microsoft YaHei,sans-serif;
+    color: #444443;
+}
+.btn{
+    background-color: #f4645f;
+    height: 40px;
+    line-height: 40px;
+    width: 100px;
+    color: white;
+    border-radius: 3px;
+}
+.hr{
+    border-bottom: 1px solid #ebebeb;
+    height: 1;
+    width: 100%;
+    margin: 30px 0;
+}
+.link:hover{
+    color: #f4645f;
+}
+.btns #num,#next{
+    background-color:#f4645f;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    margin: 10px;
+    color: white;
+}
+
+.btns #num{
+    width: 150px;
+}
+
+.btns #next{
+    width: 30px;
+}
+.btns{
+    display: flex;
+    justify-content: center;
+}
