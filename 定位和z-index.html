@@ -1,0 +1,137 @@
+<!DOCTYspanE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta httspan-equiv="X-UA-Comspanatible" content="IE=edge">
+        <meta name="viewspanort" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            body {
+                margin: 0;
+            }
+
+            .nav {
+                position: fixed;
+                top: 0;
+                background-color: #ffe502;
+                width: 100%;
+            }
+
+            .nav .cont {
+                max-width: 1140px;
+                margin: 0 auto;
+            }
+
+            .nav .cont .left {
+                float: left;
+            }
+
+            .nav .cont .right {
+                float: right;
+            }
+
+            .cont {
+                font-size: 16px;
+            }
+
+            .left,
+            .right {
+                margin: 15px 0;
+            }
+
+            .link {
+                margin: 0 16px;
+            }
+
+            .titc {
+                width: 100%;
+                height: 900px;
+                position: relative;
+            }
+
+            .title {
+                width: 158px;
+                height: 53px;
+                padding: 20px 30px;
+                margin: 14px 0;
+                border: 1px solid black;
+                border-radius: 10px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .title p {
+                font-weight: 500;
+                margin: 0;
+                position: relative;
+            }
+
+            .t {
+                font-size: 12px;
+            }
+
+            .msg {
+                font-size: 28px;
+            }
+
+            .circle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #ffe502;
+                top: 30px;
+                left: -20px;
+                z-index: 1;
+                position: absolute;
+            }
+
+            .tri {
+                width: 0;
+                height: 0;
+                position: absolute;
+                z-index: 1;
+                border: 20px solid transparent;
+                border-right: 20px solid #ffea00;
+                top: -15px;
+                right: 20px;
+                transform: rotate(-16deg);
+            }
+        </style>
+    </head>
+
+    <body>
+        <nav class="nav">
+            <div class="cont">
+                <div class="left">
+                    <span class="link">码蜂社</span>
+                    <span class="link">首页</span>
+                    <span class="link">基础闯关班</span>
+                    <span class="link">WEB 闯关班</span>
+                    <span class="link">课程选择</span>
+                    <span class="link">社区</span>
+                    <span class="link">关于我们</span>
+                </div>
+                <div class="right">
+                    <span class="link">登录</span>
+                    <span class="link">注册</span>
+                </div>
+            </div>
+        </nav>
+        <div class="titc">
+            <div class="title">
+                <p class="t">SHARED COURSE</p>
+                <p class="msg">课程分享</p>
+                <div class="circle"></div>
+                <div class="tri"></div>
+            </div>
+        </div>
+    </body>
+
+    </html>
