@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .nav {
+            background-color: #eeeeee;
+            border-radius: 3px;
+            border: 1px solid #bbbbbb49;
+            color: #5c5c5c;
+            overflow: hidden;
+        }
+        .nav>.link{
+            padding: 15px;
+            float: left;
+            cursor: pointer;
+        }
+        .link:hover{
+            background-color: #5c5c5c3b;
+        }
+        @media  only screen and ( max-width:786px ) {
+            .phone{
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="link phone">菜鸟教程</div>
+        <div class="link phone" style="  background-color: #5c5c5c3b;">iOS</div>
+        <div class="link phone"> SVN</div>
+        <div class="link phone">Java ▼</div>
+    </nav>
+</body>
+
+</html>
