@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .old,
+        .new {
+            width: 500px;
+            height: 500px;
+            margin: 10px;
+        }
+
+        .old::after {
+            content: "";
+            display: block;
+            width: 0;
+            clear: both;
+        }
+
+        .old .main {
+            background-color: antiquewhite;
+            width: 100%;
+            height: 100%;
+            padding-left: 100px;
+            padding-right: 100px;
+            box-sizing: border-box;
+        }
+
+        .old .sub {
+            background-color: aqua;
+            width: 100px;
+            height: 100%;
+            margin-left: -100%;
+        }
+
+        .old .extra {
+            background-color: rgb(0, 255, 21);
+            width: 100px;
+            height: 100%;
+            margin-left: -100px;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .new {
+            display: flex;
+        }
+
+        .new .main {
+            background-color: antiquewhite;
+            flex-grow: 1;
+        }
+
+        .new .sub {
+            order: -1;
+            width: 100px;
+            background-color: aqua;
+        }
+
+        .new .extra {
+            width: 100px;
+            background-color: rgb(0, 255, 21);
+        }
+        [class$="container"]{
+            border: 1px solid black;
+            margin: 10px;
+            height: 100px;
+        }
+        .item{
+            background-color: aqua;
+        }
+        .f-container{
+            text-align: center;
+            line-height: 100px;
+        }
+        .f-container .item{
+            display: inline;
+        }
+        .s-container{
+            position: relative;
+        } 
+        .s-container .item{
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            margin: auto;
+            width: 100px;
+            height: 50px;
+        }
+        .t-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="old">
+        <div class="main left"> main 传统方法</div>
+        <div class="sub left"> sub</div>
+        <div class="extra left">extra</div>
+    </div>
+    <div class="new">
+        <div class="main">main flex布局</div>
+        <div class="sub">sub</div>
+        <div class="extra"> extra</div>
+    </div>
+    <div class="f-container">
+        <div class="item">
+            this is item
+        </div>
+    </div>
+    <div class="s-container">
+        <div class="item">
+            this is item
+        </div>
+    </div>
+    <div class="t-container">
+        <div class="item">
+            this is item
+        </div>
+    </div>
+</body>
+
+</html>
