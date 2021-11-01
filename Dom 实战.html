@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="signup" target="_blank" onsubmit="return onSignupFormSubmit()">
+        <p id="signup-error" style="color:red"></p>
+        <p>
+            用户名:
+            <input id="username" type="text" name="username">
+        </p>
+        <p>
+            口令:
+            <input type="password" id="password" name="password">
+        </p>
+        <p>
+            重复口令:
+            <input type="password" id="password-2">
+        </p>
+        <p>
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+        </p>
+    </form>
+    <script>
+        var a = document.getElementById("signup-error")
+        function log(msg) {
+            alert.innerHTML = msg;
+        }
+        function onSignupFormSubmit() {
+            a.innerHTML = ""
+            event.preventDefault()
+            let name = document.getElementsByName("username")[0].value
+            let pwd = document.getElementsByName("password")[0].value
+            let npwd = document.getElementById("password-2").value
+
+
+            if (!(/^[a-zA-Z]/.test(name) && /^[a-zA-Z0-9_]{6,16}$/.test(name))) {
+                a.innerHTML = "以字母开头，6-16个英文字符，数字或下划线"
+                return
+            }
+            if (!(/^[a-zA-Z0-9_@#$%^&*()+]{8,20}$/.test(pwd))) {
+                a.innerHTML = "8-20个字符，英文字符，数字，下划线或特殊符号"
+                return
+            }
+            if (!(pwd == npwd)) {
+                a.innerHTML = "重复口令：必须和口令一致"
+                return
+            }
+        }
+    </script>
+</body>
+
+</html>

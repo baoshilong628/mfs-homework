@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        header a {
+            text-decoration: none;
+            color: #808080;
+            display: block;
+            padding: 15px 15px;
+            font-size: 20px;
+        }
+
+        header::after {
+            content: "";
+            display: block;
+            width: 0;
+            clear: both;
+        }
+
+        .title {
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: url(https://work.mafengshe.com/static/imgs/banner.jpg);
+            height: 270px;
+            width: 100%;
+            margin-top: -1px;
+        }
+        .cont{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 30px 100px;
+        }
+        .card{
+            width: 20%;
+            background-color: #4cd8e0;
+            height: 200px;
+            margin: 30px;
+            border-radius: 10px;
+
+            position: relative;
+            overflow: hidden;
+        }
+        .info{
+            position: absolute;
+            bottom: 0;
+            text-align: center;
+            width: 100%;
+            margin: 0;
+            padding: 20px;
+            background-color: #00474c;
+            box-sizing: border-box;
+            color: white;
+        }
+        .index{
+            position: absolute;
+            text-align: center;
+            height: 70px;
+            width: 70px;
+            border-radius: 50%;
+            background-color: #20b6d2;
+            top: -30px;
+            left: -15px;
+            line-height: 70px;
+            font-size: 25px;
+        }
+        .dir{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .page{
+            font-size: 17px;
+            padding: 15px;
+            cursor: pointer;
+        }
+        .page:hover{
+            color: red;
+            background-color: #8080802f;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="" class="fl">码蜂社 · 作业闯关</a>
+        <a href="" class="fr">消息</a>
+        <a href="" class="fr">登出</a>
+    </header>
+    <div class="title">
+        <h1 class="big">一分耕耘 一分收获</h1>
+        <h2 class="small">NO PAINS NO GAINS</h2>
+    </div>
+    <div id="cont" class="cont">
+
+    </div>
+
+    <div id="dir" class="dir">
+        
+    </div>
+
+    <template id="page">
+        <div class="page">1</div>
+    </template>
+    <template id="card">
+        <div class="card">
+            <a href="/" style="width: 100%;height: 100%; display: block; position:absolute;" ></a>
+            <img src="https://work.mafengshe.com/static/imgs/平静.svg" alt="" srcset="" style="width: 100px;margin: 10px auto;display: block;">
+            <p class="index">1</p>
+            <p class="info">12123123</p>
+        </div>
+    </template>
+
+    <script>
+        var tc = document.getElementById("card")
+        var tp = document.getElementById("page")
+        var dr = document.getElementById("dir")
+        var ct = document.getElementById("cont")
+        function createDOM(){
+            let a=[]
+            for(let i=1;i<=50;i++)
+            {
+                let card = tc.content.cloneNode(true)
+                card.querySelector(".index").innerHTML=i
+                card.querySelector(".info").innerHTML="实战"+i
+                card.querySelector("a").href="/detail?id="+i
+                a.push(card)
+            }
+            return a
+        }
+        var dom= createDOM()
+        function putDOM(p){
+            ct.innerHTML=""
+            for(let i=12*(p-1);i<12*p&&i<dom.length;i++){
+                ct.appendChild(dom[i].cloneNode(true))
+            }
+        }
+
+        function putPage(le){
+            for(let i=1;i<=le;i++){
+                let p= tp.content.cloneNode(true)
+                p.querySelector(".page").innerHTML=i
+                p.querySelector(".page").setAttribute("onClick",`putDOM(${i})`)
+                dr.appendChild(p)
+            }
+        }
+        putPage(Math.ceil(dom.length/12))
+        putDOM(1)
+    </script>
+</body>
+
+</html>
