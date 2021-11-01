@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>钟表</title>
+	<style>
+		#canvas{
+			width: 900px;
+			height: 900px;
+			margin: 0 auto;
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+<canvas id="canvas" width="1000" height="1000"></canvas>
+<script>
+	var ctx = document.getElementById("canvas").getContext("2d");
+	ctx.translate(500,500);
+	
+	function drawCircle(){
+        ctx.beginPath();
+        ctx.lineWidth = 6
+        ctx.strokeStyle = "blue"
+        ctx.arc(0,0,400,0,2*Math.PI)
+        ctx.stroke()
+	}
+	function drawMin(){
+	    for (let i =1 ;i <=60 ;i++){
+	        ctx.beginPath()
+		    ctx.strokeStyle = "black"
+		    ctx.lineWidth= 3
+		    let sx = 350*Math.sin(i * 6 * Math.PI/180)
+            let sy = 350*Math.cos(i * 6 * Math.PI/180)
+            let ex = 400*Math.sin(i * 6 * Math.PI/180)
+            let ey = 400*Math.cos(i * 6 * Math.PI/180)
+		    ctx.moveTo(sx,sy)
+		    ctx.lineTo(ex,ey)
+		    ctx.stroke()
+	    }
+        for (let i =1 ;i <= 12 ;i++){
+            ctx.beginPath()
+            ctx.strokeStyle = "black"
+            ctx.lineWidth= 6
+            let sx = 300*Math.sin(i * 30 * Math.PI/180)
+            let sy = 300*Math.cos(i * 30 * Math.PI/180)
+            let ex = 400*Math.sin(i * 30 * Math.PI/180)
+            let ey = 400*Math.cos(i * 30 * Math.PI/180)
+            ctx.moveTo(sx,sy)
+            ctx.lineTo(ex,ey)
+            ctx.stroke()
+        }
+        let data= new Date()
+		let ex,ey;
+        let h = (data.getHours()%12) * 30
+        let m = data.getMinutes() * 6
+        let s = data.getSeconds() * 6
+        ctx.beginPath()
+        ctx.strokeStyle = "red"
+        ctx.lineWidth= 6
+         ex = 350*Math.sin(h * Math.PI/180)
+         ey = -350*Math.cos(h * Math.PI/180)
+        ctx.moveTo(0,0)
+        ctx.lineTo(ex,ey)
+        ctx.stroke()
+		ctx.beginPath()
+		ctx.arc(ex,ey,10,0,Math.PI*2)
+		ctx.stroke()
+		
+        ctx.beginPath()
+        ctx.strokeStyle = "green"
+        ctx.lineWidth= 4
+         ex = 370*Math.sin(m * Math.PI/180)
+         ey = -370*Math.cos(m * Math.PI/180)
+        ctx.moveTo(0,0)
+        ctx.lineTo(ex,ey)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.strokeStyle = "blue"
+        ctx.lineWidth= 3
+         ex = 400*Math.sin(s * Math.PI/180)
+         ey = -400*Math.cos(s * Math.PI/180)
+        ctx.moveTo(0,0)
+        ctx.lineTo(ex,ey)
+        ctx.stroke()
+	}
+	function main(){
+        ctx.clearRect(-1000,-1000,2000,2000)
+        drawCircle();
+        drawMin();
+	}
+	main()
+	setInterval(main,1000)
+</script>
+</body>
+</html>
