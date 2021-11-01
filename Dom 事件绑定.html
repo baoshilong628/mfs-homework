@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+		}
+		nav{
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			background-color: #00a2e2;
+		}
+		.tab{
+			padding: 15px 15px;
+			cursor: pointer;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+<nav>
+	<div id="t1" class="tab">tab1</div>
+	<div id="t2" class="tab">tab2</div>
+	
+</nav>
+<div id="cont" class="cont">
+
+</div>
+<button onclick="start()">抽奖</button>
+<button onclick="stop()">停止</button>
+<script>
+	let t1 = document.getElementById("t1")
+	let t2 = document.getElementById("t2")
+	var cont =document.getElementById("cont")
+	t1.addEventListener("click",()=>{
+	    cont.innerText="你好我是tab1"
+	})
+	t2.addEventListener("click",()=>{
+	    cont.innerText="你好我是tab2"
+	})
+	var num
+	function start(){
+	   num= setInterval(()=>{
+            let  d = Math.random()
+            if (d<0.01)
+            {
+                cont.innerText="特等将"
+                return
+            }
+            if (d<0.11)
+            {
+                cont.innerText="一等奖"
+                return;
+            }
+
+            if (d<0.41) {
+                cont.innerText = "二等将"
+                return;
+            }
+            if (d<0.81) {
+                cont.innerText = "三等将"
+                return;
+            }
+
+            cont.innerText="鼓励将"
+	    },200)
+	}
+	function stop(){
+	    clearInterval(num)
+	}
+</script>
+</body>
+</html>
