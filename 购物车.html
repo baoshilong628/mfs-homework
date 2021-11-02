@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		*{
+            user-select: none;
+		}
+	.shop,.cart{
+		border: 1px solid black;
+		border-radius: 10px;
+		width: 100%;
+		padding: 10px;
+		margin-bottom: 30px;
+	}
+	.card{
+		margin: 30px;
+		background-color: aquamarine;
+		width: 100px;
+		height: 100px;
+		cursor: pointer;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+	.cont{
+		display: flex;
+		justify-content: start;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+	</style>
+</head>
+<body>
+<div class="shop">
+	<h1>商店</h1>
+	<p>点击放入购物车</p>
+	<div class="cont" >
+		<div class="card" onclick="addMe('苹果')">
+			<p class="info">苹果</p>
+		</div>
+		<div class="card" onclick="addMe('香蕉')">
+			<p class="info">香蕉</p>
+		</div>
+		<div class="card" onclick="addMe('梨')">
+			<p class="info">梨</p>
+		</div>
+		<div class="card" onclick="addMe('西瓜')">
+			<p class="info">西瓜</p>
+		</div>
+	</div>
+	
+</div>
+<div class="cart">
+	<h1>购物车</h1>
+	<p>点击放回商店</p>
+	<div id="cont" class="cont">
+	
+	</div>
+</div>
+
+<template id="card">
+	<div class="card">
+		<p class="info">123</p>
+		<p class="num">123</p>
+	</div>
+</template>
+	<script>
+		var data={}
+		
+		function setCard(){
+			let cont = document.getElementById("cont")
+			cont.innerHTML=""
+			for (let i in data){
+                let cardTemplate = document.getElementById("card").content.cloneNode(true)
+			    cardTemplate.querySelector(".info").innerText=i
+				cardTemplate.querySelector(".num").innerText="数量"+data[i]
+				cardTemplate.querySelector(".card").setAttribute("onclick",`dropMe('${i}')`)
+				cont.appendChild(cardTemplate)
+			}
+		}
+		function dropMe(name){
+		    data[name]-=1
+			if(data[name]==0) delete data[name]
+			setCard()
+			setData()
+		}
+		function addMe(name){
+		    if(data[name] ==undefined)
+		        data[name]=0
+			data[name]++
+			setCard()
+			setData()
+		}
+		function getData(){
+		    data=JSON.parse(localStorage.data)
+		}
+		function setData(){
+		    localStorage.data=JSON.stringify(data)
+		}
+		getData()
+		setCard()
+	</script>
+</body>
+</html>
