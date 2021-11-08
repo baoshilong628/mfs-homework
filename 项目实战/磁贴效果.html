@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<script src="jq.js"></script>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		body{
+			margin:0;
+			padding:0;
+		}
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            height: 2000px;
+	        background-color: #00e266;
+        }
+        .nav{
+	        width: 100%;
+	        height: 70px;
+	        margin-top: 30px;
+	        display: block;
+	        background-color:cadetblue;
+        }
+        .fixed-top {
+	        position: fixed;
+	        top: 0;
+	        margin: 0;
+        }
+	</style>
+</head>
+<body>
+<nav class="nav ">
+</nav>
+<div class="container">
+
+</div>
+<script>
+	window.onscroll = function (){
+	    if(window.scrollY>30)
+	        $(".nav").addClass("fixed-top")
+		else
+		    $(".nav").removeClass("fixed-top")
+	}
+</script>
+</body>
+</html>

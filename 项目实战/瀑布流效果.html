@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+	<style>
+		.container {
+			position: relative;
+		}
+        .item {
+            position: absolute;
+            width: 250px;
+            margin: 5px;
+            transition: all 1s;
+        }
+        .type1 {
+            background-color: Cyan;
+            height: 250px;
+        }
+
+        .type2 {
+            background-color: Coral;
+            height: 450px;
+        }
+
+        .type3 {
+            background-color: Indigo;
+            height: 350px;
+        }
+	</style>
+</head>
+<body>
+<div class="container">
+</div>
+<script src="jq.js"></script>
+<script>
+	function getNum() {
+        const containerWidth = $(".container").width();
+        const itemWidth = 260;
+        return  num =Math.floor(containerWidth / itemWidth);
+    }
+	function insertDataALine() {
+	    const num =getNum()
+		const container = $(".container")
+	    for(let i = 0;i<num;i++){
+            const className =`type${Math.floor(Math.random()*3)+1}`
+		    container.append($(`<div class ='item ${className}'></div>`))
+	    }
+    }
+
+    function waterFall() {
+
+        var itemWidth = 260
+        var colNum = getNum()
+        var heights = [];
+
+        for (var i = 0; i < colNum; i++) {
+            heights.push(0)
+        }
+
+        $(".item").each(function () {
+            var col = findMinIndex(heights);
+            var ele = $(this)
+
+            ele.css({
+                top: heights[col] + "px",
+                left: col * itemWidth + "px"
+            });
+
+            heights[col] += ele.outerHeight(true);
+        })
+
+    }
+    function findMinIndex(arr) {
+        let minIndex = 0;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] < arr[minIndex])
+                minIndex = i;
+        }
+        return minIndex;
+    }
+
+    function update(){
+	    insertDataALine()
+	    waterFall()
+    }
+    insertDataALine()
+    insertDataALine()
+    insertDataALine()
+    waterFall()
+	window.onscroll=function(){
+	    if($(document).height() - $(window).height() == $(window).scrollTop())
+	        update()
+	}
+    $(window).on("resize", function () {
+        waterFall()
+    })
+</script>
+</body>
+</html>

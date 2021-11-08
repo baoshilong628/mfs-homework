@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<script src="jq.js"></script>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		*{
+			user-select: none;
+		}
+		.container {
+			width: 800px;
+			margin: 0 auto;
+			height:6000px;
+		}
+		img{
+			width:600px;
+			height:600px;
+			margin: 60px auto;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+    <img data-src="img/p1.png">
+	<img data-src="img/p2.png">
+	<img data-src="img/p3.png">
+	<img data-src="img/p4.png">
+	<img data-src="img/p5.png">
+	<img data-src="img/p6.png">
+	<img data-src="img/p7.png">
+	<img data-src="img/p8.png">
+</div>
+<script>
+    function isShow($node) {
+        const windowH = $(window).height();
+        const scrollTop = $(window).scrollTop();
+        const nodeOT = $node.offset().top;
+        const nodeH = $node.height();
+        return nodeOT <= scrollTop + windowH && nodeOT + nodeH >= scrollTop
+    }
+	window.onscroll = function () {
+        $("img").each(function () {
+	
+	        if(isShow($(this)))
+	            $(this).attr("src", $(this).data("src") )
+        })
+    }
+</script>
+</body>
+</html>

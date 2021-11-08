@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<style type="text/css">
+	.cont{
+		width: 900px;
+		margin: 0 auto;
+		height:2000px;
+		background-color: #00a2e2;
+	}
+	.back{
+		display:none;
+		position:fixed;
+		right:30px;
+		bottom:30px;
+		width:300px;
+		height:300px;
+		color: white;
+		background-color: #00e266;
+		font-size: 20px;
+	}
+	.show{
+		display:block;
+	}
+</style>
+<body>
+<div class="cont">
+
+</div>
+<button class="back">
+返回顶部
+</button>
+<script>
+
+	window.onscroll=function(){
+		    if(window.scrollY>0)
+		        $(".back").addClass("show")
+		    else
+                $(".back").removeClass("show")
+	}
+    $(".back").click(function() {
+        window.scrollTo(0,0)
+    })
+</script>
+</body>
+</html>
