@@ -46,6 +46,12 @@
 	            $(this).attr("src", $(this).data("src") )
         })
     }
+
+    $("img").each(function () {
+
+        if(isShow($(this)))
+            $(this).attr("src", $(this).data("src") )
+    })
 </script>
 </body>
 </html>
