@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+<form action="">
+	<h1>选择省市区</h1>
+	<select id="province" onchange="setCity()">
+		<option value="">--省份--</option>
+	</select>
+	<select id="city" onchange="setCounty()">
+		<option value="">--市--</option>
+	</select>
+	<select id="county">
+		<option value="">--区县--</option>
+	</select>
+</form>
+<form onsubmit="return false">
+	<h2>用户表单</h2>
+	<label for="username">username</label>
+	<input type="text" id="username" pattern="^[A-Za-z].{5,17}" oninput="checkusername()">
+	<label for="password">password</label>
+	<input type="password" id="password" pattern=".{6,18}">
+	<label for="pwd-rpt">pwd-rpt</label>
+	<input type="password" id="pwd-rpt" pattern=".{6,18}" oninput="passwordRepeatInput()">
+	<button type="submit">提交</button>
+</form>
+<script src="data.js"></script>
+<script src="https://baoshilong628.github.io/mfs-homework/jq/jq.js"></script>
+<script>
+	const user=["a123456","a654321","admin123"]
+    function passwordRepeatInput(){
+        var input=document.getElementById("pwd-rpt")
+	    var  password = document.getElementById("password").value
+        if(password != input.value){
+            input.setCustomValidity("Password values do not match.")
+        }else{
+            input.setCustomValidity("")
+        }
+    }
+    function checkusername(){
+        var input=document.getElementById("username")
+	    if(user.findIndex(input.value)!=-1){
+            input.setCustomValidity("username has been registered")
+	    }else {
+	        input.setCustomValidity("")
+	    }
+    }
+    var p, c, cy
+
+    function setProvince() {
+        const province = data.map((item) => {
+            return item.region.name
+        })
+        for (let i = 0; i < province.length; i++) {
+            $("#province").append(`<option value="${province[i]}">${province[i]}</option>`)
+        }
+    }
+
+    function setCity() {
+        const selectedProvince = $("#province option:selected").val()
+        let city = "";
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].region.name == selectedProvince) {
+                city = data[i].region.state.map((item) => {
+                    return item.name
+                })
+                c = data[i].region.state
+                break
+            }
+        }
+        $("#city").empty()
+        $("#city").append(`<option value="" >--市--</option>`)
+        $("#county").empty()
+        $("#county").append(`<option value="">--区县--</option>`)
+        for (let i = 0; i < city.length; i++) {
+            $("#city").append(`<option value="${city[i]}">${city[i]}</option>`)
+        }
+    }
+
+    function setCounty() {
+        const selectedCity = $("#city option:selected").val()
+        let county = "";
+        for (let i = 0; i < c.length; i++) {
+            if (c[i].name == selectedCity) {
+                county = c[i].city.map((item) => {
+                    return item.name
+                })
+                break
+            }
+        }
+        $("#county").empty()
+        $("#county").append(`<option value="">--区县--</option>`)
+        for (let i = 0; i < county.length; i++) {
+            $("#county").append(`<option value="${county[i]}">${county[i]}</option>`)
+        }
+    }
+
+    setProvince()
+</script>
+</form>
+</body>
+</html>
