@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>新闻瀑布流</title>
+</head>
+<style>
+    * {
+        user-select: none;
+    }
+
+    .cont {
+        position: relative;
+        background-color: #aaaaaa;
+    }
+
+    .item {
+        position: absolute;
+        width: 300px;
+	    max-height: 600px;
+	    overflow: hidden;
+        margin: 5px;
+        background: white;
+        transition: all 1s;
+    }
+    .image {
+	    width: 100%;
+    }
+    .link{
+	    position:absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+    }
+    .tips{
+	    visibility:hidden;
+        position: fixed;
+	    bottom:0;
+	    right: 0;
+	    padding:60px;
+	    background:#00e266;
+    }
+    .show{
+	    visibility: visible;
+    }
+</style>
+<body>
+<div id="cont" class="cont">
+</div>
+<div id="tips" class="tips">
+	正在加载新闻
+</div>
+<script src="../jq/jq.js"></script>
+<script>
+    function addNews({title, images, url}) {
+        let item =$(`
+<div class="item">
+<h1>${title}</h1>
+<a href="${url}" class="link"></a>
+</div>
+`)
+        for (let url of images){
+            let img = $("<img>")
+            img.attr("src", url)
+	        img.addClass("image")
+            item.append(img)
+        }
+        $("#cont").append(item)
+    }
+    function getNews(pageSize,page) {
+        let url =`https://learning-api.mafengshe.com/news?pageSize=${pageSize}&page=${page}`
+	    return new Promise((resolve,reject)=>{
+	        $.ajax({
+		        url,dataType:"json",
+		        success:function (data){
+			        let {result:{data:{list:ls}}} = data
+		            let customeData = ls.map(item =>{
+		                 let images = item.allPics.pics.map(pic=>{
+		                    return pic.imgurl
+		                })
+		                return {title:item.title,images:new Set(images),url:item.URL}
+		            })
+			        resolve(customeData)
+		        },
+		        error:function (){
+		            reject()
+		        }
+	        })
+	    })
+    }
+    function* getNewsGenerator(){
+        for(let page = 1;;page++)
+            yield getNews(20,page).then(news=>{
+                $("#tips").addClass("show")
+                for (let single of news)
+                    addNews(single)
+                setTimeout(()=>{
+                    waterfall()
+                    $("#tips").removeClass("show")
+                },500)
+            })
+    }
+    let newsGenerator = getNewsGenerator()
+    newsGenerator.next()
+    function getColumnsNumber(){
+        let containerWidth =$(".cont").width();
+        let itemWidth = $(".item").outerWidth(true);
+        return [Math.floor(containerWidth / itemWidth),containerWidth,itemWidth]
+    }
+    function waterfall(){
+	    let [num,containerWidth,itemWidth] = getColumnsNumber()
+        let columns = new Array(num).fill(0)
+	    $(".item").each(function(){
+	        let col = columns.indexOf(Math.min(...columns));
+	        let item = $(this);
+	        item.css({
+		        top:columns[col] + "px",
+		        left:itemWidth * col +"px"
+	        })
+            columns[col]+=item.outerHeight(true);
+	    })
+    }
+    window.onscroll=function(){
+        if($(document).height() - $(window).height() == $(window).scrollTop())
+            newsGenerator.next()
+    }
+    $(window).on("resize", function () {
+        waterfall()
+    })
+</script>
+</body>
+</html>
