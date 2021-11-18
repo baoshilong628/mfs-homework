@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<style>
+		*{
+			user-select: none;
+		}
+		.folder{
+			cursor:pointer;
+			font-weight: bold;
+		}
+		ul{
+			list-style: number;
+		}
+		li{
+			font-weight:normal;
+		}
+	</style>
+</head>
+<body>
+<div id="app">
+	<tree :folder="tree"></tree>
+</div>
+
+<script type="text/x-template" id="tree-template">
+	<div>
+		<ul>
+			<li :class="{folder:isFolder(file)}" v-for="(file,index) in folder" :key="index" >
+				<p @dblclick="mkdir(file)" @click="isFolder(file) && toggle(index)">{{file.name}} {{isFolder(file)?isOpen(index)?"[-]":"[+]":""}}</p>
+				<tree v-if="isFolder(file) && isOpen(index)" :folder="file.child"></tree>
+			</li>
+			<li @click="addFile">
+				+
+			</li>
+		</ul>
+	</div>
+</script>
+
+<script>
+	Vue.component("tree", {
+	    template:"#tree-template",
+	    props:["folder"],
+		data:function (){
+	        return {
+	            opened:[]
+	        }
+		},
+		methods:{
+            addFile(){
+              this.folder.push({name:"new staff"})
+            },
+	        mkdir(file){
+	            if(!this.isFolder(file))
+                    Vue.set(file,'child',[{name:"new staff"}])
+	        },
+	        isFolder:function(folder){
+	          return folder.child !== undefined
+	        },
+            toggle(index){
+                if (!this.isOpen(index))
+                    this.opened.push(index)
+	            else {
+	                this.opened.splice(this.opened.indexOf(index),1)
+                }
+            },
+			isOpen(index){
+                return -1 !== this.opened.indexOf(index)
+			}
+		}
+	})
+let app = new Vue({
+	el:"#app",
+	data:{
+	    tree:[
+            {
+                name:"123",
+                child:[{
+                    name: "123"
+                },{
+                    name:"321",
+	                child:[
+		                {
+		                    name:"aaa"
+		                }
+	                ]
+                }]
+            }
+	    ]
+	}
+})
+</script>
+</body>
+</html>

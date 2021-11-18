@@ -72,3 +72,68 @@ let p3 = p2.then((data)=>{
 })
 p2 == p3 //false
 ```
+
+#代码题
+
+```javascript
+    function ajaxGet(url) {
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true)
+        xhr.send(null)
+        return new Promise(res => {
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState == 4) {  //监听readyState状态
+                    if (xhr.status == 200 || xhr.status == 0) {  //监听HTTP状态码
+                        res(xhr.responseText);
+                    }
+                }
+            }
+        })
+    }
+
+    ajaxGet("http://learning-api.mafengshe.com/news").then(data => console.log(data))
+
+    let parallelData = []
+    for (let i = 1; i <= 10; i++) {
+        ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=${i}`).then(data => parallelData.push(data))
+    }
+    let serialData = []
+    let p = ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=1`)
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=2`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=3`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=4`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=5`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=6`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=7`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=8`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=9`)
+        })
+        .then(data => {
+            serialData.push(data)
+            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=10`)
+        }).then(data=>serialData.push(data))
+
+```

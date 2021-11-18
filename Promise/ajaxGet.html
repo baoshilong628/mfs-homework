@@ -24,51 +24,102 @@
         })
     }
 
-    ajaxGet("http://learning-api.mafengshe.com/news").then(data => console.log(data))
+    // ajaxGet("http://learning-api.mafengshe.com/news").then(data => console.log(data))
+	//
+    // let parallelData = []
+    // for (let i = 1; i <= 10; i++) {
+    //     ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=${i}`).then(data => parallelData.push(data))
+    // }
+    // let serialData = []
+    // let p = ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=1`)
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=2`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=3`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=4`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=5`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=6`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=7`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=8`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=9`)
+    //     })
+    //     .then(data => {
+    //         serialData.push(data)
+    //         return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=10`)
+    //     }).then(data=>serialData.push(data))
 
-    let parallelData = []
-    for (let i = 1; i <= 10; i++) {
-        ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=${i}`).then(data => parallelData.push(data))
+    
+    // function* serialDataGetter() {
+    //     let serialData = []
+	//     for(let i = 1; i <= 10;i++){
+	//         let data = yield ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=${i}`)
+	// 	    serialData.push(data)
+	//     }
+	//     return serialData
+    // }
+    // function runSerialDataGetter(iter){
+    //     return new Promise(resolve => {
+    //         function next(err,data){
+    //             let {value:task,done:isDone} = iter.next(data)
+    //             if(isDone){
+    //                 resolve(task)
+	//                 return
+    //             }
+    //             task.then(result=>next(err,result))
+    //         }
+    //         next()
+    //     })
+    // }
+    // runSerialDataGetter(serialDataGetter()).then(data=>{
+    //     console.log(data)
+    // })
+
+
+    function*  parallelDataGetter() {
+        let parallelData = []
+        for(let i = 1; i <= 10;i++){
+            let data = yield ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=${i}`)
+            parallelData.push(data)
+        }
+        return parallelData
     }
-    let serialData = []
-    let p = ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=1`)
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=2`)
+    function runParallelDataGetter(iter){
+        return new Promise(resolve => {
+            function next(err,data){
+                let {value:task,done:isDone} = iter.next(data)
+                if(isDone){
+                    Promise.all(task).then(result=>resolve(result))
+                    return
+                }
+                next(err,task)
+            }
+            next()
         })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=3`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=4`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=5`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=6`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=7`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=8`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=9`)
-        })
-        .then(data => {
-            serialData.push(data)
-            return ajaxGet(`http://learning-api.mafengshe.com/news?pageSize=10&page=10`)
-        }).then(data=>serialData.push(data))
-
+    }
+    runParallelDataGetter(parallelDataGetter()).then(data=>{
+        console.log(data)
+    })
 </script>
 </body>
 </html>

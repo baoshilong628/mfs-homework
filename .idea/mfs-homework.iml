@@ -9,5 +9,8 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="@types/jquery" level="application" />
+    <orderEntry type="library" name="Vue" level="application" />
+    <orderEntry type="library" name="vue" level="application" />
+    <orderEntry type="library" name="marked" level="application" />
   </component>
 </module>

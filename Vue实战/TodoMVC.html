@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<link rel="stylesheet" href="./font_ol5zerwvi6p/iconfont.css">
+	<style>
+		*{
+            user-select:none;
+		}
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+	        min-height: 100vh;
+	        background-color: #eeeeee;
+	        display: flex;
+	        flex-direction: column;
+        }
+        header{
+	        height:400px;
+        }
+        footer{
+	        height:300px;
+        }
+        .center{
+	        display:flex;
+	        justify-content: center;
+	        align-items: center;
+        }
+        .container{
+	        flex-grow: 1;
+        }
+        .title{
+	        font-size: 60px;
+        }
+        .item {
+	        background:white;
+	        width:500px;
+	        height:40px;
+	        display:flex;
+	        padding:10px;
+	        border-bottom:1px solid rgba(14, 14, 14, 0.21);
+	        align-items: center;
+        }
+        .item .opt{
+	        width:40px;
+	        height:40px;
+        }
+        ::placeholder{
+	        color: rgba(255, 54, 54, 0.15);
+	        font-style: italic;
+        }
+        .item .text{
+	        flex-grow:1;
+	        border:none;
+	        font-size: 30px;
+        }
+        .deleted{
+	        color:#aaaaaa;
+            text-decoration-line: line-through;
+        }
+        .item .text:focus{
+	        outline:none;
+        }
+        .filter{
+	        flex-grow: 1;
+        }
+        .filter span{
+	        margin:0 10px;
+            cursor: pointer;
+        }
+         .selected{
+	        border-radius: 3px;
+	        border: 1px solid #f84f72;
+        }
+        .pointable{
+	        cursor: pointer;
+        }
+	</style>
+</head>
+<body>
+<div id="app">
+	<header class="center">
+		<h1 class="title">Todos</h1>
+	</header>
+	<div class="container center">
+		<div class="todo" id="todo">
+			<div class="item">
+				<div class="opt center pointable" @click="switchAllTodo">
+					<span class="iconfont icon-xialajiantouxiao" style="font-size:20px;"></span>
+				</div>
+				<input type="text" class="text" placeholder="What needs to be done?" v-model="inputTodo" @keyup.enter="addNewTodo"/>
+			</div>
+			<div v-for="(todo ,index) in filterList" class="item" >
+				<div class="opt center pointable" style="border:2px solid green; border-radius: 50% ;" @click="todo.switch()">
+					<span v-if="todo.done" class="iconfont icon-dui" style="font-size:20px;"></span>
+				</div>
+				<input  type="text" :class="{text:true,deleted:todo.done}" :value="todo.txt" readonly/>
+				<div  class="opt center pointable" @click="removeTodo(index)">
+					<span class="iconfont icon-cuowu" style="font-size:20px;"></span>
+				</div>
+			</div>
+			<div class="item">
+				<span >{{todoLeft}} item left</span>
+				<div class="filter center">
+					<span :class="{selected:doneFilter=='all'}" @click="doneFilter='all'">All</span>
+					<span :class="{selected:doneFilter=='active'}" @click="doneFilter='active'">Active</span>
+					<span :class="{selected:doneFilter=='completed'}" @click="doneFilter='completed'">Completed</span>
+				</div>
+				<span class="pointable" :style="{visibility:todoLeft != list.length?'visible':'hidden'}" @click="clearCompleted">Clear completed</span>
+			</div>
+		</div>
+	</div>
+	<footer class="center">
+		<p>made by baoshilong</p>
+	</footer>
+
+	<script>
+
+		class Todo{
+		    constructor(txt,done = false) {
+		        this.txt = txt
+			    this.done = done
+            }
+            switch(){
+		        this.done = ! this.done
+            }
+		}
+
+		let app = new Vue({
+			el:"#todo",
+			data:{
+			    list:[],
+                inputTodo:"",
+				doneFilter:"all"
+			},
+			computed:{
+			    filterList(){
+			        switch (this.doneFilter){
+			            case "all":
+			                return this.list
+				        case "active":
+				            return this.list.filter(i=>!i.done)
+				        case "completed":
+				            return this.list.filter(i=>i.done)
+			        }
+			    },
+                todoLeft(){
+                   return  this.list.filter(i=>!i.done).length
+                }
+			},
+			methods:{
+                switchAllTodo(){
+                    let willDone = 0 != this.todoLeft;
+
+                      this.list = this.list.map(i=>{
+                          i.done = willDone;
+                          return i
+                      })
+                },
+			    clearCompleted(){
+			      this.list = this.list.filter(i=>!i.done)
+			    },
+			    removeTodo(index){
+			        this.list.splice(index,1);
+			    },
+			    addNewTodo(){
+			        let txt = this.inputTodo
+
+			        if("" == txt) return
+
+			        let newTodo = new Todo(txt)
+
+			        this.list.push(newTodo)
+
+                    this.inputTodo = ""
+			    }
+			}
+		})
+	</script>
+</div>
+</body>
+</html>
