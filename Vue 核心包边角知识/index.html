@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<style>
+		.item{
+			display:inline-block;
+			width:30px;
+			height:30px;
+			background-color: #eeeeee;
+			border-radius: 3px;
+			margin:10px;
+			text-align: center;
+			line-height: 30px;
+		}
+		.fade-leave-active,.fade-enter-active{
+			transition: all 0.5s ease-in;
+		}
+		.fade-leave-to{
+			opacity:0;
+			transform:translateY(100%)
+		}
+        .fade-enter{
+            opacity:0;
+            transform:translateY(100%)
+        }
+	</style>
+</head>
+<body>
+<div id="app">
+	<myrender></myrender>
+	<button @click="add">add</button>
+	<button @click="remove">remove</button>
+	<br>
+
+	<transition-group name="fade" >
+		<span :key="item.id" v-for="item in list" class="item" >{{item.value}}</span>
+	</transition-group >
+
+</div>
+<script>
+    Vue.mixin({
+        created(){
+            console.log("created");
+        }
+    })
+	Vue.component("myrender",{
+	    props:["message"],
+      render(h){
+          let nodeList = [h("h1",{},"I'm a template!")]
+	      if(this.message) nodeList.push(h("p",{},this.message))
+	      else nodeList.push(h("p",{},"No message."))
+          return h('div', {}, nodeList)
+      }
+	})
+    function IntegerRandom(start,end) {
+        return Math.floor(start + Math.random() * (end - start))
+    }
+    function UUIDCreater(){
+        let count = 0;
+        return function (){
+            return count++
+        }
+    }
+    function* range(start,stop) {
+        for(let i = start; i<= stop;i++ )
+            yield i
+    }
+    let uuid = UUIDCreater()
+	let app = new Vue({
+		el:"#app",
+		mounted(){
+		  for(let i of range(0,12))
+		      this.add()
+		},
+		methods:{
+		  add(){
+		      this.list.splice(IntegerRandom(0,this.list.length-1),0,{id:uuid(),value:IntegerRandom(0,12)})
+		  },
+			remove(){
+		      this.list.splice(IntegerRandom(0,this.list.length-1),1)
+			}
+		},
+		data:{
+		    list:[]
+		}
+	})
+</script>
+</body>
+</html>
