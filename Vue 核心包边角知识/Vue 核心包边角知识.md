@@ -73,3 +73,46 @@ console.log('组件钩子被调用')
 混合对象的钩子被调用
 
 组件钩子被调用
+
+
+# 代码题
+## 请实现全局混合，当组件创建(created)的时候打印 created
+
+```javascript
+    Vue.mixin({
+        created(){
+            console.log("created");
+        }
+    })
+```
+## 请手动将如下 template 转化为与之等价的 render 函数
+
+```html
+
+<div>
+   <h1>I'm a template!</h1>
+   <p v-if="message">
+      {{ message }}
+   </p>
+   <p v-else>
+      No message.
+   </p>
+</div>
+```
+
+```javascript
+    render(h){
+          let nodeList = [h("h1",{},"I'm a template!")]
+	      if(this.message) nodeList.push(h("p",{},this.message))
+	      else nodeList.push(h("p",{},"No message."))
+          return h('div', {}, nodeList)
+      }
+```
+
+## 请完成如下渐变效果
+## 预览
+https://baoshilong628.github.io/mfs-homework/Vue%20%E6%A0%B8%E5%BF%83%E5%8C%85%E8%BE%B9%E8%A7%92%E7%9F%A5%E8%AF%86/index.html
+## 源码
+https://github.com/baoshilong628/mfs-homework/blob/main/Vue%20%E6%A0%B8%E5%BF%83%E5%8C%85%E8%BE%B9%E8%A7%92%E7%9F%A5%E8%AF%86/index.html
+
+# 算法
