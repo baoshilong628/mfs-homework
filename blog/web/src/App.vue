@@ -64,7 +64,7 @@ export default {
     offline(){
       this.setToken("")
       delete localStorage.token
-      location.reload()
+      this.$router.push("/")
     },
     handleDialogClose(){
       this.$refs.dialog.resetFields()

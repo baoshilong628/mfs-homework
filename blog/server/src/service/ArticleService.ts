@@ -1,19 +1,26 @@
-import {Repository} from "typeorm";
+import {Between, Connection, Repository} from "typeorm";
 import Article from "../entity/Article";
+import KeyWord from "../entity/KeyWord";
 
 export default class ArticleService{
 
     articleRepository: Repository<Article>;
 
-    constructor(articleRepository:Repository<Article>) {
+    keyWordRepository: Repository<KeyWord>;
+
+    connection: Connection;
+    constructor(articleRepository:Repository<Article>,  keyWordRepository: Repository<KeyWord>,connection:Connection) {
         this.articleRepository = articleRepository
+        this.keyWordRepository = keyWordRepository
+        this.connection = connection
     }
-    public async getProfile( {name,month,tag,page,size} ){
+    public async getProfile( {name,month,tag,page,size,key} ){
 
         let [year,onlyMonth] =month.split("-");
 
         let query = this.articleRepository
             .createQueryBuilder("article")
+
             .select(  "article.id","id")
             .addSelect( "article.profile","profile")
             .addSelect(   "article.title","title")
@@ -29,18 +36,33 @@ export default class ArticleService{
         if(tag !== ""){
             query.andWhere("tag = :tag",{tag})
         }
+        if(key !== ""){
+
+            query.andWhere("wd.word = :key",{key})
+                .leftJoin("article.KeyWords","wd")
+        }
         query.limit(size)
             .offset(size * page)
 
         return query.getRawMany()
     }
-    public async addNewArticle(article:Article){
-        const  ar = await this.articleRepository.findOne({
-            id: article.id
-        })
-        if(ar != undefined)
-            await this.articleRepository.delete(ar)
-        return await this.articleRepository.save(article)
+    public async addNewArticle(article:Article,words:string[]){
+
+        await this.deleteArticle(article.id)
+
+
+        let newArticle = await this.articleRepository.save(article)
+
+        for(let word of words){
+            let wd = await this.keyWordRepository.findOne({
+                word:word
+            },{relations:["articles"]})
+
+            wd.articles.push(newArticle)
+
+            await this.connection.manager.save(wd)
+        }
+        return newArticle
 
     }
     public async getArticleById(username,articleId){
@@ -48,7 +70,7 @@ export default class ArticleService{
         return await this.articleRepository.findOne({
             id:articleId,
             author:username
-        })
+        },{relations:["KeyWords"]})
     }
     public async getMonthCount(username){
 
@@ -80,8 +102,27 @@ export default class ArticleService{
     public async deleteArticle(id){
         const  ar = await this.articleRepository.findOne({
             id
+        },{relations:["KeyWords"]})
+
+        if(ar === undefined) return
+
+        for(let word of ar.KeyWords){
+            let wd  = await this.keyWordRepository.findOne(word.id,{relations:["articles"]})
+            wd.articles = wd.articles.filter(item => item.id !== id)
+            await this.connection.manager.save(wd)
+        }
+        ar.KeyWords = []
+        await this.connection.manager.save(ar)
+        await this.articleRepository.delete(ar.id)
+    }
+
+    public async getLastArticle(username){
+
+        return await this.articleRepository.find({
+            select:["id","title"],
+            where:{
+                lastFixedDate:Between(new Date(new Date().getTime() - 7000 * 24 * 60 * 60 ),new Date())
+            }
         })
-        if(ar != undefined)
-            await this.articleRepository.delete(ar)
     }
 }

@@ -11,6 +11,9 @@ import * as cors from "koa2-cors"
 import Article from "./entity/Article";
 import {ArticleRouterBuilder} from "./router/ArticleRouter";
 import ArticleService from "./service/ArticleService";
+import KeyWord from "./entity/KeyWord";
+import KeyWordRouterBuilder from "./router/KeyWordRouter";
+import KeyWordService from "./service/KeyWordService";
 
 async function run(){
 
@@ -27,14 +30,16 @@ async function run(){
         database: "blog",
         entities: [
             User,
-            Article
+            Article,
+            KeyWord
         ],
         synchronize: true,
         logging: true
     })
 
     app.use(UserRouterBuilder(new UserService(connection.getRepository(User))))
-    app.use(ArticleRouterBuilder(new ArticleService(connection.getRepository(Article))))
+    app.use(ArticleRouterBuilder(new ArticleService(connection.getRepository(Article),connection.getRepository(KeyWord),connection)))
+    app.use(KeyWordRouterBuilder(new KeyWordService(connection.getRepository(KeyWord))))
 
     app.listen(8000);
 }

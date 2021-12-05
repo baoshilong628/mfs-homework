@@ -5,6 +5,10 @@
     <span>标签: {{ article.tag }}</span>
     <span>作者：{{ article.author }}</span>
     <span>最后修改日期：{{ article.lastFixedDate }}</span>
+    <div class="wordContainer">
+      关键字：
+      <div v-for="(word,index) in article.KeyWords" class="word">{{word.word}}</div>
+    </div>
     <div class="profile">
       {{ article.profile }}
     </div>
@@ -74,6 +78,15 @@ export default {
     margin-top:5px;
     padding-top: 10px;
     color: #3b3b3b;
+  }
+}
+.wordContainer{
+  display:flex;
+  flex-wrap: wrap;
+  .word{
+    margin: 6px;
+    padding: 6px;
+    border: 2px solid #6ebef3;
   }
 }
 </style>

@@ -41,13 +41,13 @@ export class Api{
         return res.data
     }
 
-    public async getProfile(param:{token:string,month:any,tag:any,page:any,size:any}){
+    public async getProfile(param:{token:string,month:any,tag:any,page:any,size:any,key:any}){
 
         const res = await this.postData("/profile",param)
 
         return res.data
     }
-    public async addNewArticle(param:{token:string,article:any}){
+    public async addNewArticle(param:{token:string,article:any,words:string[]}){
 
         const  res  = await this.postData("/article",param)
 
@@ -106,5 +106,33 @@ export class Api{
 
         return res.data
 
+    }
+    public async addNewWord(param:{token:string,word:string}){
+
+        const  res  = await this.postData("/keyword",param)
+
+        return res.data
+    }
+
+    public async getAllKeyWords(param:{token:string}){
+
+        const  res  = await this.postData("/keyword/all",param)
+
+        return res.data
+    }
+
+    public async getKeyWordInfo(param:{token:string}){
+
+        const  res  = await this.postData("/keyword/count",param)
+
+        return res.data
+    }
+
+    public async getLastArticle(param:{token:string}){
+
+
+        const  res  = await this.postData("/article/last",param)
+
+        return res.data
     }
 }

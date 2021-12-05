@@ -44,17 +44,17 @@ export default createStore({
 
       commit("setUserInfo",userInfo)
     },
-    async getProfile({commit,state},{month,tag,page,size}) {
+    async getProfile({commit,state},{month,tag,page,size,key}) {
 
       if(state.token === "") return ""
 
-      return await api.getProfile({token: state.token,month,tag,page,size})
+      return await api.getProfile({token: state.token,month,tag,page,size,key})
     },
-    async addNewArticle({commit,state},article){
+    async addNewArticle({commit,state},{article,words}){
 
       if(state.token === "") return ""
 
-      return await api.addNewArticle({token: state.token,article})
+      return await api.addNewArticle({token: state.token,article,words})
     },
     async getArticle({commit,state},id) {
 
@@ -111,6 +111,37 @@ export default createStore({
       if(state.token === "") return ""
 
       return await api.deleteArticles({token: state.token,id})
+    },
+
+    async addNewWord({commit,state},{word}) {
+
+      if(state.token === "") return ""
+
+      return await api.addNewWord({token: state.token,word})
+    },
+
+    async getAllKeyWords({commit,state}) {
+
+      if(state.token === "") return ""
+
+      return await api.getAllKeyWords({token: state.token})
+
+    },
+
+    async getKeyWordInfo({commit,state}) {
+
+      if(state.token === "") return ""
+
+      return await api.getKeyWordInfo({token: state.token})
+
+    },
+
+    async getLastArticle({commit,state}) {
+
+      if(state.token === "") return ""
+
+      return await api.getLastArticle({token: state.token})
+
     }
 
   },

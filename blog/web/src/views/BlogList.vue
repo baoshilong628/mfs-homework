@@ -5,7 +5,7 @@
       <el-button @click="all">查询所有</el-button>
     </div>
     <div v-if="profileList.length ===0" style="text-align:center">
-      <h1>还没有登录或编写博客</h1>
+      <h1>没有数据</h1>
     </div>
     <BlogProfile v-for="profile in profileList"  :profile="profile" />
     <div class="ctl">
@@ -25,6 +25,9 @@ import { ElNotification } from 'element-plus'
 
 export default {
   name: "BlogList",
+  watch:{
+    "$route":"getData"
+  },
   methods:{
     ...mapActions([
         "getProfile"
@@ -34,7 +37,7 @@ export default {
     },
     getData(){
 
-      this.getProfile({month:this.month,tag:this.tag,page:this.page,size:this.size}).then((data)=>{
+      this.getProfile({month:this.month,tag:this.tag,page:this.page,size:this.size,key:this.key}).then((data)=>{
         this.profileList = data
       })
     },
@@ -66,6 +69,10 @@ export default {
     BlogProfile
   },
   computed:{
+    key(){
+      const k = this.$route.query.key;
+      return k?k:""
+    },
     month(){
       const m = this.$route.query.month
       return m?m:""

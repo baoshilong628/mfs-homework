@@ -55,7 +55,24 @@ export default {
       this.$refs["formData"].resetFields()
     },
     triggerSignUp(){
-
+      if(this.formData.username === ""){
+        ElNotification({
+          message:"用户名不能为空"
+        })
+        return
+      }
+      if(this.formData.password === ""){
+        ElNotification({
+          message:"密码不能为空"
+        })
+        return
+      }
+      if(this.formData.password !== this.formData.secondPassword){
+        ElNotification({
+          message:"密码不一致"
+        })
+        return
+      }
       this.signUp({
         username:this.formData.username,
         password:this.formData.password
@@ -76,6 +93,22 @@ export default {
       })
     },
     triggerSignIn(){
+
+      if(this.formData.username === ""){
+        ElNotification({
+          message:"用户名不能为空"
+        })
+        return
+      }
+      if(this.formData.password === ""){
+        ElNotification({
+          message:"密码不能为空"
+        })
+        return
+      }
+
+
+
       this.signIn({
         username:this.formData.username,
         password:this.formData.password

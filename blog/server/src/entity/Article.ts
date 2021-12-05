@@ -1,4 +1,5 @@
-import {Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, ManyToMany} from "typeorm";
+import KeyWord from "./KeyWord";
 
 @Entity()
 export default class Article {
@@ -22,5 +23,10 @@ export default class Article {
 
     @Column()
     tag: string
+
+    @Column({default:0})
+    read: number
+    @ManyToMany(type => KeyWord,keyword=>keyword.articles)
+    KeyWords:KeyWord[]
 
 }

@@ -10,19 +10,19 @@ export function ArticleRouterBuilder(articleService: ArticleService){
 
     router.post("/profile",async (ctx)=>{
 
-        let {token,month,tag,page,size} = ctx.request.body;
+        let {token,month,tag,page,size,key} = ctx.request.body;
 
         let userInfo = Token.getUserInfo(token)
 
-        ctx.body = await articleService.getProfile( {name:userInfo.username,month,tag,page,size} )
+        ctx.body = await articleService.getProfile( {name:userInfo.username,month,tag,page,size,key} )
 
     })
 
     router.post("/article",async (ctx)=>{
 
-        let {token,article} = ctx.request.body
+        let {token,article,words} = ctx.request.body
 
-        ctx.body = await articleService.addNewArticle(article)
+        ctx.body = await articleService.addNewArticle(article,words)
 
     })
 
@@ -66,6 +66,16 @@ export function ArticleRouterBuilder(articleService: ArticleService){
         let {token,id} = ctx.request.body
 
         ctx.body = await articleService.deleteArticle(id)
+
+    })
+
+    router.post("/article/last",async (ctx)=>{
+
+        let {token} = ctx.request.body
+
+        let userInfo = Token.getUserInfo(token)
+
+        ctx.body = await articleService.getLastArticle(userInfo)
 
     })
 

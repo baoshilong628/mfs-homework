@@ -4,11 +4,19 @@
     <router-view/>
   </div>
   <div class="filter">
-    <h2>文章列表</h2>
+    <h2>最新博客</h2>
+    <div class="lastCont">
+      <p @click="toSee(article.id)" v-for="article in lastArticle">《 {{article.title}} 》</p>
+    </div>
+    <h2>月度博客</h2>
     <span  v-for="count in  monthCount" @click="getMonthList(count.month)" class="monthFilter">{{count.month.replace("-","年 ")+"月" +`(${count.num})`}}</span>
     <h2>标签列表</h2>
     <div class ="tagContainer">
       <span v-for="count in  tagCount" @click="gtc(count.tag)" class="tagFilter">{{count.tag + `(${count.num})`}}</span>
+    </div>
+    <h2>关键字列表</h2>
+    <div class ="tagContainer">
+      <span v-for="count in  keyCount" @click="getkeyList(count.word)" class="tagFilter">{{count.word + `(${count.num})`}}</span>
     </div>
   </div>
 </div>
@@ -21,19 +29,34 @@ export default {
   data(){
     return{
       monthCount:[],
-      tagCount:[]
+      tagCount:[],
+      keyCount:[],
+      lastArticle:[]
     }
   },
   methods:{
     ...mapActions([
     "getMonthCount",
-        "getTagCount"
+        "getTagCount",
+        "getKeyWordInfo",
+        "getLastArticle"
     ]),
     gtc(tag){
       this.$router.push({
         path:"/list",
         query:{
           tag
+        }
+      })
+    },
+    toSee(id){
+      this.$router.push("/article/"+id)
+    },
+    getkeyList(key){
+      this.$router.push({
+        path:"/list",
+        query:{
+          key
         }
       })
     },
@@ -47,6 +70,12 @@ export default {
     }
   },
   mounted() {
+    this.getLastArticle().then((res)=>{
+      this.lastArticle = res
+    })
+    this.getKeyWordInfo().then((res)=>{
+     this.keyCount = res
+    })
     this.getMonthCount().then((res)=>{
       this.monthCount = res
     })
@@ -88,6 +117,11 @@ export default {
       }
     }
 
+  }
+}
+.lastCont{
+  p{
+    cursor: pointer;
   }
 }
 </style>
